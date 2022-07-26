@@ -1,0 +1,62 @@
+{                                                                                                                
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/*.crswap": true,
+			"node_modules": true,
+			".volumes": true
+		},
+		"search.exclude": {
+			"**/vendor": true
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"formulahendry.auto-close-tag",
+			"steoates.autoimport",
+			"formulahendry.auto-rename-tag",
+			"aaron-bond.better-comments",
+			"kamikillerto.vscode-colorize",
+			"pranaygp.vscode-css-peek",
+			"ms-azuretools.vscode-docker",
+			"mikestead.dotenv",
+			"editorconfig.editorconfig",
+			"usernamehw.errorlens",
+			"eamodio.gitlens",
+			"wix.vscode-import-cost",
+			"oderwat.indent-rainbow",
+			"yzhang.markdown-all-in-one",
+			"shd101wyy.markdown-preview-enhanced",
+			"davidanson.vscode-markdownlint",
+			"pkief.material-icon-theme",
+			"sndst00m.vscode-native-svg-preview",
+			"eg2.vscode-npm-script",
+			"christian-kohler.npm-intellisense",
+			"zardoy.npm-rapid-ready",
+			"ibm.output-colorizer",
+			"christian-kohler.path-intellisense",
+			"felixfbecker.php-debug",
+			"neilbrayfield.php-docblocker",
+			"felixfbecker.php-intellisense",
+			"mehedidracula.php-namespace-resolver",
+			"esbenp.prettier-vscode",
+			"syler.sass-indented",
+			"tyriar.sort-lines",
+			"stylelint.vscode-stylelint",
+			"wayou.vscode-todo-highlight",
+			"gruntfuggly.todo-tree",
+			"ms-vscode.vscode-typescript-tslint-plugin",
+			"earshinov.simple-alignment"
+		]
+	}
+}

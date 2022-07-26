@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:${MARIADB_VERSION}
+    container_name: "${APP_ALIAS}_db"
+    volumes:
+      - ../.volumes/db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - ../../.env
+    networks:
+      internal:
+        aliases:
+          - "${APP_ALIAS}_internal"
+    labels:
+      - 'traefik.enable=false'

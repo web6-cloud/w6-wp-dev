@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "${PROJECT_NAME}_mailhog"
+    networks:
+      - backend
+      - proxy
+    ports:
+      - 1025
+      - 8025
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.${PROJECT_NAME}_mailhog.entrypoints=websecure"
+      - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`${PROJECT_BASE_URL}`) && Path(`/mailhog`)"
+      - "traefik.http.routers.${PROJECT_NAME}_mailhog.service=${PROJECT_NAME}_mailhog_service"
+      - "traefik.http.services.${PROJECT_NAME}_mailhog_service.loadbalancer.server.port=8025"

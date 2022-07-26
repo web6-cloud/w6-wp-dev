@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  crond:
+    image: wodby/wordpress-php:$PHP_TAG
+    container_name: "${PROJECT_NAME}_crond"
+    environment:
+      CRONTAB: "0 * * * * wp cron event run --due-now --path=/var/www/html"
+      PHP_FPM_CLEAR_ENV: "no"
+    command: sudo -E LD_PRELOAD=/usr/lib/preloadable_libiconv.so crond -f -d 0
+    volumes:
+      - "./src/plugin:/var/www/html/wp-cntent/themes/${PROJECT_NAME}"
+      - "./.volumes/wordpress/www:/var/www/html"
+      - "./.volumes/files:/mnt/files"
+    networks:
+      - backend
+    links:
+      - mariadb
+    depends_on:
+      - php
+    labels:
+      - "traefik.enable=false"

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  dba:
+    image: adminer:${ADMINER_VERSION}
+    container_name: "${APP_ALIAS}_dba"
+    restart: always
+    networks:
+      proxy:
+      internal:
+        aliases:
+          - "${APP_ALIAS}_internal"
+    env_file:
+      - ../../.env
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxy'
+      - 'traefik.http.routers.${APP_ALIAS}_dba.entrypoints=websecure'
+      - 'traefik.http.routers.${APP_ALIAS}_dba.rule=Host(`${APP_DOMAIN}`) && Path(`/adminer`)'
+      - "traefik.http.routers.${APP_ALIAS}_dba.service=${APP_ALIAS}_dba"
+      - 'traefik.http.services.${APP_ALIAS}_dba.loadbalancer.server.port=8080'

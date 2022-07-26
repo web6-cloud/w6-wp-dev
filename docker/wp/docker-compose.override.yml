@@ -1,0 +1,38 @@
+version: '3'
+
+# SERVICES
+services:
+  wp:
+    build:
+      context: ./wp
+      dockerfile: Dockerfile
+      args:
+        WORDPRESS_VERSION: ${WORDPRESS_VERSION}
+        APP_ALIAS: ${APP_ALIAS}
+    container_name: "${APP_ALIAS}_wp"
+    depends_on:
+      - db
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST:db:3306
+      - WORDPRESS_DB_USER:${DB_USER}
+      - WORDPRESS_DB_PASSWORD:${DB_PASSWORD}
+      - WORDPRESS_DB_NAME:${DB_NAME}
+      - WORDPRESS_TABLE_PREFIX:${DB_TABLE_PREFIX}
+    working_dir: /var/www/html
+    networks:
+      proxy:
+      internal:
+        aliases:
+          - "${APP_ALIAS}_internal"
+    volumes:
+      - ../src/${APP_ALIAS}:/var/www/html/wp-content/themes/${APP_ALIAS}
+      - ../src/${APP_ALIAS}-child:/var/www/html/wp-content/themes/${APP_ALIAS}-child
+      - ../.volumes/wp:/var/www/html
+      - ./wp/php.ini:/usr/local/etc/php/conf.d/php-custom.ini
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxy'
+      - 'traefik.http.routers.${APP_ALIAS}_wp.entrypoints=websecure'
+      - 'traefik.http.routers.${APP_ALIAS}_wp.rule=Host(`${APP_DOMAIN}`)'
+      - 'traefik.http.services.${APP_ALIAS}_wp.loadbalancer.server.port=80'
