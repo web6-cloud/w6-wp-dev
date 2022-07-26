@@ -1,0 +1,6 @@
+[submodule "src/w6-wp-theme"]
+	path = src/w6-wp-theme
+	url = git@web6.github.com:web6-cloud/w6-wp-theme.git
+[submodule "src/w6-wp-framework"]
+	path = src/w6-wp-framework
+	url = git@web6.github.com:web6-cloud/w6-wp-framework.git
